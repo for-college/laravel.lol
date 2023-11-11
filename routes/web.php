@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,7 +74,7 @@ Route::get('/govsign/{sign}/{id}', function ($sign, $id) {
  * whereNumber - только цифры
  * whereAlphaNumeric - только буквы и цифры
  * ===========================================
-**/
+ **/
 
 Route::get('/govsign2/{sign}/{id}', function ($sign, $id) {
   return "Номер: " . $sign . ". Регион: " . $id;
@@ -82,9 +83,9 @@ Route::get('/govsign2/{sign}/{id}', function ($sign, $id) {
 /**
  * Разрешение конфликтов в маршрутах
  * Сначала указываем частный случай, а потом - общие
-**/
+ **/
 
-Route::prefix('/test3')->group(function () {
+Route::prefix('/test2')->group(function () {
   Route::get('/all', function () {
     return "Все тесты";
   });
@@ -93,3 +94,21 @@ Route::prefix('/test3')->group(function () {
     return "Тест - " . $n;
   });
 });
+
+/**
+ * Маршрут, использующий контроллер
+ * Route::get('/route', ["full controller's name", "action's name"])
+ */
+
+/** Если мы заюзали имя контроллера, то можно писать так  **/
+Route::get('/hi', [PostController::class, 'hello']);
+
+Route::get('/hello', ['App\Http\Controllers\PostController', 'hello']);
+
+/** Передача параметра в метод **/
+Route::get('/hi/{name}', [PostController::class, 'hello2']);
+
+/** Применение машрутов маршрутов **/
+Route::get('hello/{id}', [PostController::class, 'hello3'])->where('id', '[1-4]');
+
+Route::get('hello4/{name}', [PostController::class, 'hello4']);
