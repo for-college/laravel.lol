@@ -40,4 +40,14 @@ class PostController extends Controller
 
     return 'Город юзера: ' . $cities[$name];
   }
+
+  public function hello6()
+  {
+    return view('post.hello');
+  }
+
+  public function hello7($name)
+  {
+    return view('post.hello7', ['name' => $name, 'title' => 'Заголовок']);
+  }
 }
