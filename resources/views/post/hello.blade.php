@@ -1,4 +1,4 @@
-<x-main>
+<x-main xmlns:x-slot="http://www.w3.org/1999/xhtml">
   <x-slot:title>
     Новая тема
   </x-slot:title>
