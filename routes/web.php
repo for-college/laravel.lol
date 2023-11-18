@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TestingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,9 +63,9 @@ Route::get('/city/{city?}', function ($city = 'Томск') {
 
 /** Ограничение параметров **/
 
-Route::get('/users/{age}', function ($age) {
-  return "Возраст пользователя: " . $age;
-})->where('age', '[0-9]+');
+//Route::get('/users/{age}', function ($age) {
+//  return "Возраст пользователя: " . $age;
+//})->where('age', '[0-9]+');
 
 Route::get('/govsign/{sign}/{id}', function ($sign, $id) {
   return "Номер: " . $sign . ". Регион: " . $id;
@@ -109,11 +112,18 @@ Route::get('/hello', ['App\Http\Controllers\PostController', 'hello']);
 Route::get('/hi/{name}', [PostController::class, 'hello2']);
 
 /** Применение машрутов маршрутов **/
-Route::get('hello/{id}', [PostController::class, 'hello3'])->where('id', '[1-4]');
+Route::get('/hello/{id}', [PostController::class, 'hello3'])->where('id', '[1-4]');
 
-Route::get('hello4/{name}', [PostController::class, 'hello4']);
+Route::get('/hello4/{name}', [PostController::class, 'hello4']);
 
 /** Представления **/
-Route::get('hello6', [PostController::class, 'hello6']);
+Route::get('/hello6', [PostController::class, 'hello6']);
 
 Route::get('hello7/{name}', [PostController::class, 'hello7']);
+
+Route::get('/testing', [TestingController::class, 'index']);
+
+Route::get('/students', [StudentController::class, 'show']);
+
+Route::get('/users/show/{id}', [UserController::class, 'show']);
+Route::get('/users/shows', [UserController::class, 'showAll']);
